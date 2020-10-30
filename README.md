@@ -7,7 +7,8 @@
 
 ![alt SampleResult](https://github.com/donma/EZGitUploader/blob/master/ezhitu1.jpg?raw=true)
 
-![alt SampleResult](https://github.com/donma/EZGitUploader/blob/master/ezhitu.jpg?raw=true)
+
+![alt SampleResult](https://github.com/donma/EZGitUploader/blob/master/ezhitu2.jpg?raw=true)
 
 
 
