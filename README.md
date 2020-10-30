@@ -5,6 +5,9 @@
 
 不過我個人是覺得很方便就分享給大家吧 :)
 
+![alt SampleResult](https://github.com/donma/EZGitUploader/blob/master/ezhitu1.jpg?raw=true)
+
+![alt SampleResult](https://github.com/donma/EZGitUploader/blob/master/ezhitu.jpg?raw=true)
 
 
 
