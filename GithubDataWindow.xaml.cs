@@ -36,7 +36,7 @@ namespace EZGitUploader
             System.Windows.Application.Current.Shutdown();
         }
 
-        private async void Delete(string[] localPath)
+        private  void Delete(string[] localPath)
         {
 
             try
@@ -49,7 +49,7 @@ namespace EZGitUploader
                     return;
                 }
 
-                var existingFiles = GitHubClient.Repository.Content.GetAllContentsByRef(GitInfo.UserName, GitInfo.RepoName, "assets/", "master").Result;
+                var existingFiles = GitHubClient.Repository.Content.GetAllContentsByRef(GitInfo.UserName, GitInfo.RepoName, GitInfo.Dir+"/", "master").Result;
 
                 if (existingFiles != null)
                 {
@@ -59,7 +59,7 @@ namespace EZGitUploader
                         {
                             //    MessageBox.Show(f.Name);
                             txtResult.Content = "Delete " + f.Name;
-                            await GitHubClient.Repository.Content.DeleteFile(GitInfo.RepoId, "assets/" + f.Name, new DeleteFileRequest("delete file", f.Sha));
+                             GitHubClient.Repository.Content.DeleteFile(GitInfo.RepoId, GitInfo.Dir + "/" + f.Name, new DeleteFileRequest("delete file", f.Sha)).RunSynchronously();
 
                         }
                     }
@@ -67,7 +67,7 @@ namespace EZGitUploader
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+               // MessageBox.Show(ex.Message);
             }
         }
 
@@ -80,7 +80,7 @@ namespace EZGitUploader
                 //最後一個參數是否要轉成 base64
                 var updateRequest = new UpdateFileRequest("Upload by EZ Github Uploader.", Convert.ToBase64String(File.ReadAllBytes(localPath)), "SHA", false);
 
-                var res = GitHubClient.Repository.Content.UpdateFile(GitInfo.RepoId, "assets/" + System.IO.Path.GetFileName(localPath), updateRequest).Result;
+                var res = GitHubClient.Repository.Content.UpdateFile(GitInfo.RepoId, GitInfo.Dir + "/" + System.IO.Path.GetFileName(localPath), updateRequest).Result;
 
                 return res.Content.DownloadUrl;
             }
@@ -98,7 +98,7 @@ namespace EZGitUploader
 
             try
             {
-                var existingFiles = GitHubClient.Repository.Content.GetAllContentsByRef(GitInfo.UserName, GitInfo.RepoName, "assets/", "master").Result;
+                var existingFiles = GitHubClient.Repository.Content.GetAllContentsByRef(GitInfo.UserName, GitInfo.RepoName, GitInfo.Dir + "/", "master").Result;
 
                 if (existingFiles != null)
                 {
@@ -150,33 +150,20 @@ namespace EZGitUploader
                     var i = 0;
                     foreach (var f in files)
                     {
-                        System.Windows.Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, new ThreadStart(delegate
-                        {
-                            txtResult.Content = "Handling " + f;
+                        txtResult.Content = "Handling " + f;
 
-                            var res = UploadFile(f);
-                            if (!string.IsNullOrEmpty(res))
-                            {
-                                var t = new ListBoxItem();
-                                t.Tag = res;
-                                t.Content = System.IO.Path.GetFileName(f);
-                                listFiles.Items.Insert(0, t);
-                                //System.Windows.Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, new ThreadStart(delegate
-                                //{
-
-                                //}));
-                            }
-                        }));
+                        var res = UploadFile(f);
                     }
                 }
 
                 System.Windows.Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, new ThreadStart(delegate
                 {
                     txtResult.Content = "Success Upload";
+                    UpdateListBox();
                 }));
 
 
-                // UpdateListBox();
+              
 
             }
             else
@@ -198,7 +185,11 @@ namespace EZGitUploader
 
             GitHubClient.Credentials = new Credentials(GitInfo.Token);
 
-            UpdateListBox();
+            System.Windows.Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, new ThreadStart(delegate
+            {
+            
+                UpdateListBox();
+            }));
 
         }
 
@@ -211,6 +202,11 @@ namespace EZGitUploader
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
         {
             UpdateListBox();
+
+            System.Windows.Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, new ThreadStart(delegate
+            {
+                UpdateListBox();
+            }));
         }
     }
 }

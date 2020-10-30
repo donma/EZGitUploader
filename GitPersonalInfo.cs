@@ -11,5 +11,7 @@ namespace EZGitUploader
         public string Token { get; set; }
 
         public long RepoId { get; set; }
+
+        public string Dir { get; set; }
     }
 }

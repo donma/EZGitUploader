@@ -39,6 +39,7 @@ namespace EZGitUploader
                     txtRepo.Text = info.RepoName;
                     txtToken.Text = info.Token;
                     txtUserName.Text = info.UserName;
+                    txtDir.Text = info.Dir;
                 }
                 catch
                 {
@@ -66,6 +67,13 @@ namespace EZGitUploader
                 return;
             }
 
+
+            if (string.IsNullOrEmpty(txtDir.Text.Trim()))
+            {
+                MessageBox.Show("Directory is required");
+                return;
+            }
+
             btnSave.IsEnabled = false;
             btnSave.Content = "Checking...";
 
@@ -87,7 +95,7 @@ namespace EZGitUploader
                 {
                     if (repo.Name == txtRepo.Text.Trim())
                     {
-                        var info = new GithubPersonalInfo {  RepoName=txtRepo.Text , Token=txtToken.Text , UserName=txtUserName.Text,RepoId=repo.Id};
+                        var info = new GithubPersonalInfo {  RepoName=txtRepo.Text,Dir=txtDir.Text , Token=txtToken.Text , UserName=txtUserName.Text,RepoId=repo.Id};
 
                         var str = JsonConvert.SerializeObject(info);
                         File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "info.json", str);

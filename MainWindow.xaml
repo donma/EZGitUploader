@@ -18,9 +18,17 @@
         <Label Content="Repository :" HorizontalAlignment="Left" Margin="25,94,0,0" VerticalAlignment="Top" FontSize="16"/>
         <TextBox HorizontalAlignment="Left" x:Name="txtRepo"  Margin="143,97,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" FontSize="16"/>
 
-        <Label Content="API Token :" HorizontalAlignment="Left" Margin="25,164,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <TextBox HorizontalAlignment="Left"   x:Name="txtToken"  Margin="143,167,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" FontSize="16" Height="58"/>
-        <Button x:Name="btnSave" Content="Test And Save"  HorizontalAlignment="Left" Margin="196,238,0,0" VerticalAlignment="Top" Height="30" Width="165" FontSize="14" Click="btnSave_Click"/>
+        <Label Content="API Token :" HorizontalAlignment="Left" Margin="25,144,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <TextBox HorizontalAlignment="Left"   x:Name="txtToken"  Margin="143,147,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" FontSize="16" Height="58"/>
+
+
+
+        <Label Content="Directory :" HorizontalAlignment="Left" Margin="25,214,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <TextBox HorizontalAlignment="Left" x:Name="txtDir"   Margin="143,217,0,0" Text="assets" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" FontSize="16"/>
+
+
+
+        <Button x:Name="btnSave" Content="Test And Save"  HorizontalAlignment="Left" Margin="196,280,0,0" VerticalAlignment="Top" Height="30" Width="165" FontSize="14" Click="btnSave_Click"/>
 
 
 
