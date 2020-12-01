@@ -10,11 +10,4 @@
 
 base on .Net Core 3.1 WPF
 
-![alt SampleResult](https://github.com/donma/EZGitUploader/blob/master/ezhitu1.jpg?raw=true)
-
-
-![alt SampleResult](https://github.com/donma/EZGitUploader/blob/master/ezhitu2.jpg?raw=true)
-
-
-
 
